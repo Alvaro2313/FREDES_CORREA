@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduControl - Panel Alumno</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-top">
+                <h1><i class="fas fa-graduation-cap"></i> EduControl</h1>
+                <div class="user-info">
+                    <span id="userName">Alumno</span>
+                    <button class="btn btn-secondary" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                    </button>
+                </div>
+            </div>
+            <nav class="nav">
+                <button class="nav-btn active" data-section="notas">
+                    <i class="fas fa-clipboard-list"></i> Mis Notas
+                </button>
+                <button class="nav-btn" data-section="asistencias">
+                    <i class="fas fa-calendar-check"></i> Mi Asistencia
+                </button>
+                <button class="nav-btn" data-section="horario">
+                    <i class="fas fa-clock"></i> Mi Horario
+                </button>
+            </nav>
+        </header>
+
+        <main class="main">
+            <!-- SECCIÓN NOTAS -->
+            <section id="notas" class="section active">
+                <div class="section-header">
+                    <h2>Mis Notas</h2>
+                </div>
+                <div class="table-container">
+                    <table id="notasTable">
+                        <thead>
+                            <tr>
+                                <th>Asignatura</th>
+                                <th>Nota</th>
+                                <th>Fecha</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- SECCIÓN ASISTENCIAS -->
+            <section id="asistencias" class="section">
+                <div class="section-header">
+                    <h2>Mi Asistencia</h2>
+                </div>
+                <div class="table-container">
+                    <table id="asistenciasTable">
+                        <thead>
+                            <tr>
+                                <th>Asignatura</th>
+                                <th>Fecha</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- SECCIÓN HORARIO -->
+            <section id="horario" class="section">
+                <div class="section-header">
+                    <h2>Mi Horario</h2>
+                </div>
+                <div class="horario-container">
+                    <table id="horarioTable" class="horario-table">
+                        <thead>
+                            <tr>
+                                <th>Hora</th>
+                                <th>Lunes</th>
+                                <th>Martes</th>
+                                <th>Miércoles</th>
+                                <th>Jueves</th>
+                                <th>Viernes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="hora">08:00 - 08:45</td>
+                                <td id="lunes-1">-</td>
+                                <td id="martes-1">-</td>
+                                <td id="miercoles-1">-</td>
+                                <td id="jueves-1">-</td>
+                                <td id="viernes-1">-</td>
+                            </tr>
+                            <tr>
+                                <td class="hora">08:45 - 09:30</td>
+                                <td id="lunes-2">-</td>
+                                <td id="martes-2">-</td>
+                                <td id="miercoles-2">-</td>
+                                <td id="jueves-2">-</td>
+                                <td id="viernes-2">-</td>
+                            </tr>
+                            <tr>
+                                <td class="hora">09:45 - 10:30</td>
+                                <td id="lunes-3">-</td>
+                                <td id="martes-3">-</td>
+                                <td id="miercoles-3">-</td>
+                                <td id="jueves-3">-</td>
+                                <td id="viernes-3">-</td>
+                            </tr>
+                            <tr>
+                                <td class="hora">10:30 - 11:15</td>
+                                <td id="lunes-4">-</td>
+                                <td id="martes-4">-</td>
+                                <td id="miercoles-4">-</td>
+                                <td id="jueves-4">-</td>
+                                <td id="viernes-4">-</td>
+                            </tr>
+                            <tr>
+                                <td class="hora">11:30 - 12:15</td>
+                                <td id="lunes-5">-</td>
+                                <td id="martes-5">-</td>
+                                <td id="miercoles-5">-</td>
+                                <td id="jueves-5">-</td>
+                                <td id="viernes-5">-</td>
+                            </tr>
+                            <tr>
+                                <td class="hora">12:15 - 13:00</td>
+                                <td id="lunes-6">-</td>
+                                <td id="martes-6">-</td>
+                                <td id="miercoles-6">-</td>
+                                <td id="jueves-6">-</td>
+                                <td id="viernes-6">-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="../js/auth/auth.js"></script>
+    <script src="../js/views/alumno.js"></script>
+</body>
+</html>

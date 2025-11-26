@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduControl - Panel Tutor</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-top">
+                <h1><i class="fas fa-graduation-cap"></i> EduControl</h1>
+                <div class="user-info">
+                    <span id="userName">Tutor</span>
+                    <button class="btn btn-secondary" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                    </button>
+                </div>
+            </div>
+            <nav class="nav">
+                <button class="nav-btn active" data-section="alumnos">
+                    <i class="fas fa-users"></i> Mis Alumnos
+                </button>
+                <button class="nav-btn" data-section="notas">
+                    <i class="fas fa-clipboard-list"></i> Notas
+                </button>
+                <button class="nav-btn" data-section="asistencias">
+                    <i class="fas fa-calendar-check"></i> Asistencias
+                </button>
+            </nav>
+        </header>
+
+        <main class="main">
+            <!-- SECCIÓN ALUMNOS -->
+            <section id="alumnos" class="section active">
+                <div class="section-header">
+                    <h2>Mis Alumnos</h2>
+                </div>
+                <div class="table-container">
+                    <table id="alumnosTable">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>RUT</th>
+                                <th>Correo</th>
+                                <th>Curso</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- SECCIÓN NOTAS -->
+            <section id="notas" class="section">
+                <div class="section-header">
+                    <h2>Notas de mis Alumnos</h2>
+                    <div class="filters">
+                        <select id="alumnoFilter">
+                            <option value="">Seleccionar Alumno</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table id="notasTable">
+                        <thead>
+                            <tr>
+                                <th>Alumno</th>
+                                <th>Asignatura</th>
+                                <th>Nota</th>
+                                <th>Fecha</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- SECCIÓN ASISTENCIAS -->
+            <section id="asistencias" class="section">
+                <div class="section-header">
+                    <h2>Asistencias de mis Alumnos</h2>
+                    <div class="filters">
+                        <select id="alumnoFilterAsistencia">
+                            <option value="">Seleccionar Alumno</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table id="asistenciasTable">
+                        <thead>
+                            <tr>
+                                <th>Alumno</th>
+                                <th>Asignatura</th>
+                                <th>Fecha</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal para editar nota -->
+    <div id="editNotaModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Editar Nota</h3>
+                <span class="close" onclick="closeEditNotaModal()">&times;</span>
+            </div>
+            <form id="editNotaForm">
+                <div class="form-group">
+                    <label>Alumno:</label>
+                    <input type="text" id="editAlumnoNombre" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Asignatura:</label>
+                    <input type="text" id="editAsignaturaNombre" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Nota:</label>
+                    <input type="number" id="editNotaValor" min="1" max="7" step="0.1" required>
+                </div>
+                <div class="form-group">
+                    <label>Fecha:</label>
+                    <input type="date" id="editNotaFecha" required>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeEditNotaModal()">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../js/auth/auth.js"></script>
+    <script src="../js/views/tutor.js"></script>
+</body>
+</html>

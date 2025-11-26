@@ -1,0 +1,217 @@
+# EDUCONTROL - INSTRUCCIONES DE EJECUCIÓN
+
+## DESCRIPCIÓN DEL PROYECTO
+EduControl es un sistema de gestión educativa que permite administrar usuarios, cursos, asignaturas, notas y asistencias. El sistema cuenta con diferentes roles: Administrador, Profesor, Alumno y Tutor.
+
+## ESTRUCTURA DEL PROYECTO
+
+ProyectoEdu/
+├── views/                  # Vistas HTML del sistema
+│   ├── index.html         # Página de login
+│   ├── administrador.html # Panel del administrador
+│   ├── profesor.html      # Panel del profesor
+│   ├── tutor.html         # Panel del tutor
+│   └── alumno.html        # Panel del alumno
+├── js/                    # Archivos JavaScript
+│   ├── auth/              # Autenticación
+│   │   ├── login.js       # Lógica de login
+│   │   └── auth.js        # Verificación de autenticación
+│   ├── views/             # Lógica de vistas
+│   │   ├── administrador.js
+│   │   ├── profesor.js
+│   │   ├── tutor.js
+│   │   └── alumno.js
+│   └── utils/             # Utilidades (vacío por ahora)
+├── css/                   # Estilos
+│   └── styles.css         # Estilos principales
+├── backend/               # Código del servidor
+│   ├── server.js          # Servidor principal
+│   ├── email-endpoint.js  # Endpoint para emails
+│   └── package.json       # Dependencias del backend
+└── docs/                  # Documentación
+    └── INSTRUCCIONES_EJECUCION.txt
+
+## REQUISITOS PREVIOS
+
+1. **Navegador Web Moderno**
+   - Chrome, Firefox, Safari o Edge (versiones recientes)
+   - JavaScript habilitado
+
+2. **Conexión a Internet**
+   - El sistema se conecta a un backend en la nube
+   - URL del API: https://edcontrol-backend.onrender.com/api
+
+3. **Node.js (Solo para desarrollo del backend)**
+   - Versión 14 o superior
+   - npm (incluido con Node.js)
+
+## EJECUCIÓN DEL FRONTEND
+
+### Opción 1: Servidor Web Local (Recomendado)
+
+1. **Instalar un servidor web local:**
+   ```bash
+   # Con Python 3
+   python -m http.server 8000
+   
+   # Con Python 2
+   python -m SimpleHTTPServer 8000
+   
+   # Con Node.js (si tienes http-server instalado)
+   npx http-server -p 8000
+   
+   # Con PHP
+   php -S localhost:8000
+   ```
+
+2. **Navegar al proyecto:**
+   - Abrir el navegador
+   - Ir a: http://localhost:8000/views/index.html
+
+### Opción 2: Abrir Directamente (Limitado)
+
+1. **Abrir el archivo index.html:**
+   - Navegar a la carpeta: ProyectoEdu/views/
+   - Hacer doble clic en index.html
+   - **Nota:** Algunas funciones pueden no trabajar correctamente debido a restricciones CORS
+
+## CREDENCIALES DE ACCESO
+
+### Administrador
+- **Correo:** admin@educontrol.cl
+- **Contraseña:** admin123
+
+### Profesor
+- **Correo:** profesor@educontrol.cl
+- **Contraseña:** prof123
+
+### Tutor
+- **Correo:** tutor@educontrol.cl
+- **Contraseña:** tutor123
+
+### Alumno
+- **Correo:** alumno@educontrol.cl
+- **Contraseña:** alumno123
+
+## FUNCIONALIDADES POR ROL
+
+### ADMINISTRADOR
+- ✅ Gestión completa de usuarios (crear, editar, eliminar, habilitar/deshabilitar)
+- ✅ Gestión de cursos y asignaturas
+- ✅ Asignación de profesores a asignaturas
+- ✅ Asignación de tutores a alumnos
+- ✅ Gestión de horarios
+- ✅ Visualización de notas y asistencias
+- ✅ Reportes y estadísticas
+
+### PROFESOR
+- ✅ Ver sus asignaturas asignadas
+- ✅ Registrar y editar notas de alumnos
+- ✅ Registrar asistencias
+- ✅ Filtrar información por alumno
+
+### TUTOR
+- ✅ Ver alumnos asignados
+- ✅ Consultar notas de sus alumnos
+- ✅ Consultar asistencias de sus alumnos
+- ✅ Filtros por alumno
+
+### ALUMNO
+- ✅ Ver sus propias notas
+- ✅ Ver su asistencia
+- ✅ Ver su horario de clases
+
+## CONFIGURACIÓN DEL BACKEND (DESARROLLO)
+
+Si necesitas ejecutar el backend localmente:
+
+1. **Navegar a la carpeta backend:**
+   ```bash
+   cd backend/
+   ```
+
+2. **Instalar dependencias:**
+   ```bash
+   npm install
+   ```
+
+3. **Configurar variables de entorno:**
+   - Crear archivo .env con las configuraciones de base de datos
+   - Configurar credenciales de email (nodemailer)
+
+4. **Ejecutar el servidor:**
+   ```bash
+   npm start
+   # o
+   node server.js
+   ```
+
+5. **Actualizar URL del API:**
+   - En cada archivo JS, cambiar:
+   - De: `https://edcontrol-backend.onrender.com/api`
+   - A: `http://localhost:3000/api`
+
+## CARACTERÍSTICAS TÉCNICAS
+
+### Frontend
+- **HTML5** con estructura semántica
+- **CSS3** con diseño responsivo
+- **JavaScript ES6+** vanilla (sin frameworks)
+- **Font Awesome** para iconos
+- **Fetch API** para comunicación con backend
+
+### Backend
+- **Node.js** con Express
+- **MongoDB** como base de datos
+- **Nodemailer** para envío de emails
+- **CORS** habilitado para desarrollo
+
+### Funcionalidades Especiales
+- **Notificaciones por Email:** Se envían automáticamente al crear notas
+- **Gestión de Estados:** Usuarios pueden ser habilitados/deshabilitados
+- **Filtros Avanzados:** En todas las vistas de datos
+- **Validaciones:** Tanto en frontend como backend
+- **Responsive Design:** Funciona en dispositivos móviles
+
+## SOLUCIÓN DE PROBLEMAS
+
+### Error de CORS
+- **Problema:** "Access to fetch at '...' from origin 'file://' has been blocked by CORS policy"
+- **Solución:** Usar un servidor web local (ver Opción 1 arriba)
+
+### No se cargan los datos
+- **Problema:** Las tablas aparecen vacías
+- **Solución:** 
+  1. Verificar conexión a internet
+  2. Abrir DevTools (F12) y revisar errores en Console
+  3. Verificar que el backend esté funcionando
+
+### Error de login
+- **Problema:** "Credenciales incorrectas"
+- **Solución:**
+  1. Verificar las credenciales proporcionadas arriba
+  2. Asegurarse de que el backend esté disponible
+  3. Revisar si el usuario está habilitado
+
+### Problemas de navegación
+- **Problema:** Los enlaces no funcionan correctamente
+- **Solución:** Verificar que se esté usando la estructura de carpetas correcta
+
+## CONTACTO Y SOPORTE
+
+Para problemas técnicos o consultas:
+- Revisar la consola del navegador (F12 → Console)
+- Verificar la estructura de carpetas
+- Asegurarse de usar un servidor web local
+
+## NOTAS IMPORTANTES
+
+1. **Seguridad:** Este es un proyecto de desarrollo. En producción se deben implementar medidas de seguridad adicionales.
+
+2. **Base de Datos:** El sistema usa una base de datos compartida en la nube. Los cambios son persistentes.
+
+3. **Emails:** Las notificaciones se envían a direcciones reales configuradas en el sistema.
+
+4. **Compatibilidad:** Probado en Chrome, Firefox y Edge. Safari puede tener limitaciones menores.
+
+5. **Rendimiento:** El primer acceso puede ser lento debido al "cold start" del servidor en la nube.

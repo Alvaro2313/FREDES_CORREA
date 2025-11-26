@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduControl - Panel Profesor</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-top">
+                <h1><i class="fas fa-graduation-cap"></i> EduControl</h1>
+                <div class="user-info">
+                    <span id="userName">Profesor</span>
+                    <button class="btn btn-secondary" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                    </button>
+                </div>
+            </div>
+            <nav class="nav">
+                <button class="nav-btn active" data-section="dashboard">
+                    <i class="fas fa-tachometer-alt"></i> Dashboard
+                </button>
+                <button class="nav-btn" data-section="asignaturas">
+                    <i class="fas fa-book"></i> Mis Asignaturas
+                </button>
+                <button class="nav-btn" data-section="notas">
+                    <i class="fas fa-clipboard-list"></i> Notas
+                </button>
+                <button class="nav-btn" data-section="asistencias">
+                    <i class="fas fa-calendar-check"></i> Asistencias
+                </button>
+            </nav>
+        </header>
+
+        <main class="main">
+            <!-- DASHBOARD -->
+            <section id="dashboard" class="section active">
+                <div class="section-header">
+                    <h2><i class="fas fa-tachometer-alt"></i> Dashboard del Profesor</h2>
+                </div>
+                
+                <!-- Estadísticas Generales -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="totalAsignaturas">0</h3>
+                            <p>Asignaturas</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="totalEstudiantes">0</h3>
+                            <p>Estudiantes</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-clipboard-list"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="totalNotas">0</h3>
+                            <p>Notas Registradas</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="promedioGeneral">0.0</h3>
+                            <p>Promedio General</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="totalAsistencias">0</h3>
+                            <p>Asistencias Registradas</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-percentage"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="porcentajeAsistencia">0%</h3>
+                            <p>% Asistencia General</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Selector de Curso -->
+                <div class="dashboard-section">
+                    <div class="section-card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-filter"></i> Análisis por Curso</h3>
+                        </div>
+                        <div class="course-selector-container">
+                            <div class="form-group">
+                                <label><i class="fas fa-school"></i> Seleccionar Curso:</label>
+                                <select id="cursoAnalisisSelect">
+                                    <option value="">Ver todos los cursos</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Análisis Detallado por Curso -->
+                <div id="analisisCurso" class="dashboard-section" style="display: none;">
+                    <div class="section-card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-chart-line"></i> <span id="cursoSeleccionadoNombre">Curso</span> - Análisis Detallado</h3>
+                        </div>
+                        <div class="course-analysis">
+                            <!-- Estadísticas del curso -->
+                            <div class="course-stats-grid">
+                                <div class="course-stat-card">
+                                    <div class="stat-icon-small">
+                                        <i class="fas fa-users"></i>
+                                    </div>
+                                    <div class="stat-info">
+                                        <h4 id="estudiantesCurso">0</h4>
+                                        <p>Estudiantes</p>
+                                    </div>
+                                </div>
+                                <div class="course-stat-card">
+                                    <div class="stat-icon-small">
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <div class="stat-info">
+                                        <h4 id="promedioCurso">0.0</h4>
+                                        <p>Promedio</p>
+                                    </div>
+                                </div>
+                                <div class="course-stat-card">
+                                    <div class="stat-icon-small">
+                                        <i class="fas fa-clipboard-list"></i>
+                                    </div>
+                                    <div class="stat-info">
+                                        <h4 id="notasCurso">0</h4>
+                                        <p>Notas</p>
+                                    </div>
+                                </div>
+                                <div class="course-stat-card">
+                                    <div class="stat-icon-small">
+                                        <i class="fas fa-exclamation-triangle"></i>
+                                    </div>
+                                    <div class="stat-info">
+                                        <h4 id="estudiantesRiesgo">0</h4>
+                                        <p>En Riesgo</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Lista de estudiantes del curso -->
+                            <div class="students-analysis">
+                                <h4><i class="fas fa-users"></i> Rendimiento por Estudiante</h4>
+                                <div id="estudiantesRendimiento" class="students-grid">
+                                    <!-- Se cargan dinámicamente -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Resumen General por Curso -->
+                <div id="resumenCursos" class="dashboard-section">
+                    <div class="section-card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-chart-bar"></i> Resumen por Curso</h3>
+                        </div>
+                        <div id="notasPorCurso" class="courses-grid">
+                            <!-- Se cargan dinámicamente -->
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Resumen de Asistencias -->
+                <div class="dashboard-section">
+                    <div class="section-card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-calendar-check"></i> Resumen de Asistencias por Curso</h3>
+                        </div>
+                        <div id="asistenciasPorCurso" class="courses-grid">
+                            <!-- Se cargan dinámicamente -->
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Actividad Reciente -->
+                <div class="dashboard-section">
+                    <div class="section-card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-clock"></i> Actividad Reciente</h3>
+                        </div>
+                        <div id="actividadReciente" class="activity-list">
+                            <!-- Se carga dinámicamente -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- SECCIÓN ASIGNATURAS -->
+            <section id="asignaturas" class="section">
+                <div class="section-header">
+                    <h2>Mis Asignaturas</h2>
+                </div>
+                <div class="subjects-grid">
+                    <!-- Las asignaturas se cargan dinámicamente como tarjetas -->
+                </div>
+            </section>
+
+            <!-- SECCIÓN NOTAS -->
+            <section id="notas" class="section">
+                <div class="section-header">
+                    <h2>Gestión de Notas</h2>
+                    <div class="filters">
+                        <select id="alumnoFilter">
+                            <option value="">Seleccionar Alumno</option>
+                        </select>
+                        <button class="btn btn-primary" onclick="openModal('notaModal')">
+                            <i class="fas fa-plus"></i> Nueva Nota
+                        </button>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table id="notasTable">
+                        <thead>
+                            <tr>
+                                <th><i class="fas fa-user"></i> Alumno</th>
+                                <th><i class="fas fa-school"></i> Curso</th>
+                                <th><i class="fas fa-book"></i> Asignatura</th>
+                                <th><i class="fas fa-star"></i> Nota</th>
+                                <th><i class="fas fa-calendar"></i> Fecha</th>
+                                <th><i class="fas fa-cogs"></i> Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- SECCIÓN ASISTENCIAS -->
+            <section id="asistencias" class="section">
+                <div class="section-header">
+                    <h2>Gestión de Asistencias</h2>
+                    <div class="filters">
+                        <select id="materiaAsistenciaFilter">
+                            <option value="">Todas las materias</option>
+                        </select>
+                        <button class="btn btn-primary" onclick="openModal('asistenciaModal')">
+                            <i class="fas fa-plus"></i> Registrar Asistencia
+                        </button>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table id="asistenciasTable">
+                        <thead>
+                            <tr>
+                                <th><i class="fas fa-user"></i> Alumno</th>
+                                <th><i class="fas fa-school"></i> Curso</th>
+                                <th><i class="fas fa-book"></i> Asignatura</th>
+                                <th><i class="fas fa-calendar"></i> Fecha</th>
+                                <th><i class="fas fa-check-circle"></i> Estado</th>
+                                <th><i class="fas fa-cogs"></i> Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal Nota -->
+    <div id="notaModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Nota</h3>
+                <span class="close" onclick="closeModal('notaModal')">&times;</span>
+            </div>
+            <form id="notaForm">
+                <input type="hidden" id="notaId">
+                <div class="form-group">
+                    <label>Alumno:</label>
+                    <select id="notaAlumno" required>
+                        <option value="">Seleccionar alumno...</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Asignatura:</label>
+                    <select id="notaAsignatura" required>
+                        <option value="">Seleccionar asignatura...</option>
+                    </select>
+                </div>
+                <div id="asignaturaSeleccionada" class="form-group" style="display: none;">
+                    <!-- Se muestra la asignatura seleccionada -->
+                </div>
+                <div class="form-group">
+                    <label>Valor (1.0 - 7.0):</label>
+                    <input type="number" id="notaValor" min="1.0" max="7.0" step="0.1" required>
+                </div>
+                <div class="form-group">
+                    <label>Tipo de Evaluación:</label>
+                    <select id="notaTipoEvaluacion" required>
+                        <option value="">Seleccionar tipo...</option>
+                        <option value="Prueba">Prueba</option>
+                        <option value="Tarea">Tarea</option>
+                        <option value="Proyecto">Proyecto</option>
+                        <option value="Participación">Participación</option>
+                        <option value="Examen">Examen</option>
+                        <option value="Trabajo en Clase">Trabajo en Clase</option>
+                        <option value="Presentación">Presentación</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Fecha:</label>
+                    <input type="date" id="notaFecha" required>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('notaModal')">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Asistencia -->
+    <div id="asistenciaModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-calendar-check"></i> Registrar Asistencia por Curso</h3>
+                <span class="close" onclick="closeModal('asistenciaModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label><i class="fas fa-book"></i> Asignatura:</label>
+                    <select id="asistenciaAsignatura" required>
+                        <option value="">Seleccionar asignatura...</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-calendar"></i> Fecha:</label>
+                    <input type="date" id="asistenciaFecha" required>
+                </div>
+                <div id="estudiantesList" class="students-attendance-list">
+                    <!-- Se cargan los estudiantes del curso dinámicamente -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/auth/auth.js"></script>
+    <script src="../js/views/profesor.js"></script>
+</body>
+</html>
