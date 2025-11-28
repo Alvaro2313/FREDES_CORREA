@@ -1,0 +1,54 @@
+TABLA ASIGNATURAS - EDUCONTROL
+=====================================
+
+ESTRUCTURA DE LA TABLA:
+------------------------
+CREATE TABLE asignaturas (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nombre VARCHAR(100) NOT NULL,
+  descripcion TEXT,
+  id_curso INT,
+  id_profesor INT,
+  FOREIGN KEY (id_curso) REFERENCES cursos(id),
+  FOREIGN KEY (id_profesor) REFERENCES profesores(id)
+);
+
+DATOS DE EJEMPLO:
+-----------------
+INSERT INTO asignaturas (nombre, descripcion, id_curso, id_profesor) VALUES
+('Matemáticas', 'Álgebra y geometría básica', 1, 1),
+('Lenguaje', 'Lectura y redacción', 1, 2),
+('Historia', 'Historia de Chile contemporánea', 2, 3);
+
+DESCRIPCIÓN DE CAMPOS:
+----------------------
+- id: Identificador único de la asignatura (AUTO_INCREMENT)
+- nombre: Nombre de la asignatura (máximo 100 caracteres, obligatorio)
+- descripcion: Descripción detallada de la asignatura (texto largo, opcional)
+- id_curso: ID del curso al que pertenece la asignatura (referencia a tabla cursos)
+- id_profesor: ID del profesor que imparte la asignatura (referencia a tabla profesores)
+
+RELACIONES:
+-----------
+- Una asignatura pertenece a UN curso (id_curso → cursos.id)
+- Una asignatura es impartida por UN profesor (id_profesor → profesores.id)
+- Un curso puede tener MÚLTIPLES asignaturas
+- Un profesor puede impartir MÚLTIPLES asignaturas
+
+EJEMPLOS DE CONSULTAS:
+----------------------
+-- Obtener todas las asignaturas
+SELECT * FROM asignaturas;
+
+-- Obtener asignaturas de un curso específico
+SELECT * FROM asignaturas WHERE id_curso = 1;
+
+-- Obtener asignaturas con información del curso y profesor
+SELECT 
+    a.nombre AS asignatura,
+    a.descripcion,
+    c.nombre AS curso,
+    p.especialidad AS profesor_especialidad
+FROM asignaturas a
+LEFT JOIN cursos c ON a.id_curso = c.id
+LEFT JOIN profesores p ON a.id_profesor = p.id;
